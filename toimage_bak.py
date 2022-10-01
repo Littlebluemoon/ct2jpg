@@ -132,7 +132,7 @@ for page in range(pageMax+1):
     else:
         grid = Image.open("graphics/pages/grid_up.png")
     pages.paste(grid, (80, 421), grid)
-    print(f"Processed page {page} / {pageMax}, {cursor} / {notes[len(notes)-1][0]} notes added")
+    print(f"Processed page {page+1} / {pageMax+1}, {cursor+1} / {notes[len(notes)-1][0]+1} notes added")
     pages.save("results/" + str(page) + ".png")
 print("Files saved to /results")
 print(f"Time taken: {time.time()-t1}s")

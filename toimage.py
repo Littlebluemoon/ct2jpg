@@ -135,14 +135,12 @@ for page in range(pageMax+1):
                 pages.paste(click_dn, addClick(currPg[j][1], currPg[j][2], 1), click_dn)
         elif int(currPg[j][4]) == 1:
             if page % 2 == 0:
-                print(trackHeight(currPg[j][3]))
                 track = Image.open("graphics/notes/holdTrack.png")
                 track = track.rotate(180, expand=True)
                 track = track.resize((208, int(trackHeight(currPg[j][3]))))
                 pages.paste(track, trackPos(currPg[j][3], currPg[j][1], currPg[j][2], -1), track)
                 pages.paste(hold, addHold(currPg[j][1], currPg[j][2], -1), hold)
             else:
-                print(trackHeight(currPg[j][3]))
                 track = Image.open("graphics/notes/holdTrack.png")
                 track = track.resize((208, int(trackHeight(currPg[j][3]))))
                 pages.paste(track, trackPos(currPg[j][3], currPg[j][1], currPg[j][2], 1), track)
@@ -162,7 +160,7 @@ for page in range(pageMax+1):
     else:
         grid = Image.open("graphics/pages/grid_up.png")
     pages.paste(grid, (80, 421), grid)
-    print(f"Processed page {page} / {pageMax}, {cursor} / {notes[len(notes)-1][0]} notes added")
+    print(f"Processed page {page+1} / {pageMax+1}, {cursor} / {notes[len(notes)-1][0]+1} notes added")
     pages.save("results/" + str(page) + ".jpg")
 print("Files saved to /results")
 print(f"Time taken: {time.time()-t1}s")
