@@ -2,10 +2,10 @@ import math
 
 
 f = open("table.txt", "w")
-prefix = "4 6 "
+prefix = "4 8 "
 suffix = "e"
 f.write('{| class="fandom-table" style="width: 100%"\n')
-length = 137
+length = 131
 rows = math.ceil(length/4)
 for i in range(rows):
     for j in range(4):

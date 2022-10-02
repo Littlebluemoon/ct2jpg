@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 
-prefix = "4 7 "
+prefix = "4 9 "
 suffix = "e"
 dir = os.getcwd() + "\\results"
 for filename in os.listdir(dir):

@@ -158,7 +158,7 @@ for page in range(pageMax+1):
                     pages.paste(child, addDragChild(currPg[j][1], currPg[j][2], -1), child)
                 else:
                     pages.paste(child, addDragChild(currPg[j][1], currPg[j][2], 1), child)
-        print(f"Processed page {page} / {pageMax}, {cursor} / {notes[len(notes)-1][0]} notes added")
+        print(f"Processed page {page} / {pageMax+1}, {cursor} / {int(notes[len(notes)-1][0])+1} notes added")
         pages = pages.convert("RGB")
         pages.save(f"results/{page-1}.jpg")
 print("Files saved to /results")

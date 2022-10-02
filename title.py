@@ -2,8 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 
-text = "Darkness"
-diff = "Easy 5"
+text = "Area184"
+diff = "Easy 6"
 dir = os.getcwd() + "\\results"
 for filename in os.listdir(dir):
     f = os.path.join(dir, filename)
