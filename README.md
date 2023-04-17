@@ -67,18 +67,3 @@ LINK Y0 Y1 Y2 Y3 ...
 ...
 ```
 + LINK declares a string of drag notes. It is then followed by some space-separated numbers denoting the id of notes within it. The first one will be the drag head, the other will be its drag childs.
-### 960, a magic number
-We have gotten our hands on the chart files and the magic behind it. But here comes some nasty problems --
-- For a 2014 game, developed over more than 6 years, Cytus somehow use single floating-point precision. That being said, all numbers within the file is rounded to six digits of precision.
-	- This probably led to [this funky glitch](https://static.wikia.nocookie.net/cytus/images/0/06/M_quindoy_newworld_bug.jpg/revision/latest?cb=20141008152531), mostly due to oversight. Fixed a while later though thanks to double-precision, and only produced on really old devices. Somehow the numbers inside was still single-precision I wonder...
-- The window for getting a Critical Perfect (the note which awards full 100% of accuracy unit) is 70ms = 0.07s. For whatever reason, the developers decided to just abandon all digits behind the second decimal -- they are rarely 9998, 9999, or 0001 though, thank to single floating-point.
-- The BPM. I feel quite weird, because all integers within 1000 can be expressed without error even with single-precision, yet somehow in a 180 BPM chart, the BPM in the game file reads ```359.981994``` which is ```179.990997``` according to the aforementioned analysis. I mean -- they could've simply written ```360``` into the file instead. Then here comes a new definition -- beats per microsecond, equals to ```60000000/bpm```, that's how computers manage tempo. And for whatever whatever reason, Cytus developers really like to round this one to the nearest 50s or 100s -- in this case, ```333350```. This just feels weird, and sometimes can lead to huge deviations which cause me to fail to evaluate a song's tempo.
-With all the above factors combined, errors in calculation is nigh inevitable. However, we can just tackle this by using another unit of measurement in place of second, **tick**.
-This is also a familiar concept in MIDI, most prominent the **tick per quarter note** value. The higher the value, the more resolution the song has i.e. it can fit more notes into a single second, or any given amount of time you want. Most users will set it 480 or 960, since it is a magic number. 960 is the multiple of 2, 3, 4, 6, 8, 12, 16, 24, 32, 48 and 64. Guess what also include these magic numbers? Music of course. I have a good time creating charts with **Cylheim** which use a base page length of 960 ticks, so I went with 960 too. Ticks can only be an integer, so the accuracy can be somehow preserved compared to using seconds as the measurement of time.
-### Execution
-Now that analysis is done, all that is left to do is to actualize it.
-- **fork.py** convert the chart file into a list with tick as timestamps and hold lengths and a number declaring the note type.
-- All the drawing & pasting generate coords according to its timestamp and x-position. It is highly accurate, since I made the height of the playfield ```2880px (=960*3)```.
-- Page numbers, titles and difficulty was generated at a set coord.
-
-Well, that's all. Hope you all can use my tool to great effect.
